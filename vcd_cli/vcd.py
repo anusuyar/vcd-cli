@@ -110,4 +110,6 @@ else:
     from vcd_cli import vapp  # NOQA
     from vcd_cli import vdc  # NOQA
     from vcd_cli import vm  # NOQA
+    from vcd_cli import role  # NOQA
+    from vcd_cli import user  # NOQA
     load_user_plugins()
