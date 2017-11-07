@@ -1,5 +1,3 @@
-from __future__ import division
-
 import click
 from pyvcloud.vcd.org import Org
 
@@ -14,9 +12,13 @@ def user(ctx):
 
 \b
     Examples
-        vcd user create 'user_name' 'password' 'role_name'
-           create user in the current organization with user_name password and role_name .
-    """
+        vcd user create my-user my-password role-name
+           create user in the current organization with my-user password and role-name .
+\b
+        vcd user create 'my user' 'my password' 'role name'
+           create user in the current organization with 'my user' 'my password' and 'role name' .
+
+    """  # NOQA
     if ctx.invoked_subcommand not in [None, 'item']:
         try:
             restore_session(ctx)
@@ -119,8 +121,9 @@ def user(ctx):
               default=0,
               metavar='[deployed_vm_quota]',
               help='Quota of vApps that this user can deploy concurrently')
-def create(ctx, user_name, password, role_name, full_name, description, email, telephone, im, enabled,
-           alert_enabled, alert_email, alert_email_prefix, external, default_cached, group_role,
+def create(ctx, user_name, password, role_name, full_name, description, email,
+           telephone, im, enabled, alert_enabled, alert_email,
+           alert_email_prefix, external, default_cached, group_role,
            stored_vm_quota, deployed_vm_quota):
     try:
         client = ctx.obj['client']
@@ -132,9 +135,12 @@ def create(ctx, user_name, password, role_name, full_name, description, email, t
             raise Exception('Role \'%s\' does not exist.' % role_name)
         else:
             role_href = role[0]['href']
-            u = org.create_user(user_name, password, role_href, full_name, description, email, telephone, im,
-                                alert_email, alert_email_prefix, stored_vm_quota, deployed_vm_quota, group_role,
-                                default_cached, external, alert_enabled, enabled)
+            u = org.create_user(user_name, password, role_href, full_name,
+                                description, email, telephone, im,
+                                alert_email, alert_email_prefix,
+                                stored_vm_quota, deployed_vm_quota, group_role,
+                                default_cached, external, alert_enabled,
+                                enabled)
             stdout('User \'%s\' is successfully created.' % u.get('name'), ctx)
     except Exception as e:
         stderr(e, ctx)

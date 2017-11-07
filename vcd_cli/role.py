@@ -1,5 +1,3 @@
-from __future__ import division
-
 import click
 from pyvcloud.vcd.org import Org
 
@@ -17,7 +15,7 @@ def role(ctx):
     Examples
         vcd role list
             Get list of roles in current organization.
-    """
+    """  # NOQA
     if ctx.invoked_subcommand not in [None, 'item']:
         try:
             restore_session(ctx)
