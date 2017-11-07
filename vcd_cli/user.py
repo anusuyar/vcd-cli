@@ -131,16 +131,13 @@ def create(ctx, user_name, password, role_name, full_name, description, email,
         in_use_org_href = ctx.obj['profiles'].get('org_href')
         org = Org(client, in_use_org_href, org_name == 'System')
         role = org.get_role(role_name)
-        if len(role) == 0:
-            raise Exception('Role \'%s\' does not exist.' % role_name)
-        else:
-            role_href = role[0]['href']
-            u = org.create_user(user_name, password, role_href, full_name,
-                                description, email, telephone, im,
-                                alert_email, alert_email_prefix,
-                                stored_vm_quota, deployed_vm_quota, group_role,
-                                default_cached, external, alert_enabled,
-                                enabled)
-            stdout('User \'%s\' is successfully created.' % u.get('name'), ctx)
+        role_href = role.get('href')
+        u = org.create_user(user_name, password, role_href, full_name,
+                            description, email, telephone, im,
+                            alert_email, alert_email_prefix,
+                            stored_vm_quota, deployed_vm_quota, group_role,
+                            default_cached, external, alert_enabled,
+                            enabled)
+        stdout('User \'%s\' is successfully created.' % u.get('name'), ctx)
     except Exception as e:
         stderr(e, ctx)
