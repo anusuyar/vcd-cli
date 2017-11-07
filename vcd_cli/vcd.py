@@ -104,12 +104,12 @@ else:
     from vcd_cli import login  # NOQA
     from vcd_cli import org  # NOQA
     from vcd_cli import profile  # NOQA
+    from vcd_cli import role  # NOQA
     from vcd_cli import search  # NOQA
     from vcd_cli import system  # NOQA
     from vcd_cli import task  # NOQA
+    from vcd_cli import user  # NOQA
     from vcd_cli import vapp  # NOQA
     from vcd_cli import vdc  # NOQA
     from vcd_cli import vm  # NOQA
-    from vcd_cli import role  # NOQA
-    from vcd_cli import user  # NOQA
     load_user_plugins()
